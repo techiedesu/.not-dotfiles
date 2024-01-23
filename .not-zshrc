@@ -1,0 +1,145 @@
+# zmodload zsh/zprof
+
+[ -n "$PS1" ] || \
+  { echo "Allowed only sourcing"; exit $ERRCODE; }
+
+_fix_cursor() {
+   echo -ne '\e[3 q'
+}
+
+precmd_functions+=(_fix_cursor)
+
+source ~/.not-dotfiles/not-imports/not-gitstatusd.zsh
+
+### title
+case "$TERM" in
+  xterm*|rxvt*)
+      function xtitle () {
+          builtin print -n -- "\e]0;$@\a"
+      }
+      ;;
+  screen)
+      function xtitle () {
+          builtin print -n -- "\ek$@\e\\"
+      }
+      ;;
+  *)
+      function xtitle () {
+      }
+esac
+
+function precmd () {
+    xtitle "$(print -P $HOST: '%~')"
+}
+### end title
+
+source ~/.not-dotfiles/not-imports/not-aliases.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#bbbbbb"
+
+if [[ $UID != 0 && $EUID != 0 ]]; then
+  path+=("$HOME/.dotnet")
+  fpath=(${ASDF_DIR}/completions $fpath)
+  . "$HOME/.asdf/asdf.sh"
+
+  alias rcode="doas code --ozone-platform=wayland --user-data-dir='/root/.config/Code/' --no-sandbox"
+else
+    alias rcode="code --ozone-platform=wayland --user-data-dir='/root/.config/Code/' --no-sandbox"
+fi
+
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+setopt promptsubst
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
+##
+
+#setopt correctall
+setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
+setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
+setopt PATH_DIRS           # Perform path search even on command names with slashes.
+setopt AUTO_MENU           # Show completion menu on a succesive tab press.
+setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
+unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
+unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
+
+# Treat these characters as part of a word.
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+# Use caching to make completion for cammands such as dpkg and apt usable.
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path "$HOME/.zcache"
+
+setopt autocd
+setopt extendedglob
+
+# Group matches and describe.
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red} Vlad, don’t be stupid %f'
+
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+
+# Fuzzy match mistyped completions.
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+# Increase the number of errors based on the length of the typed word.
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+
+# Don't complete unavailable commands.
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+
+# Array completion element sorting.
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+# Directories
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
+zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
+zstyle ':completion:*' squeeze-slashes true
+
+# History
+zstyle ':completion:*:history-words' stop yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+
+# Environmental Variables
+zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^[[3~" delete-char
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 17); do time $shell -i -c exit; done
+}
+
+source ~/.not-dotfiles/not-imports/not-promt.zsh
+
+autoload -U compinit promptinit
+compinit
+
+. /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
+. /usr/share/zsh/site-contrib/fast-syntax-highlighting/F-Sy-H.plugin.zsh
