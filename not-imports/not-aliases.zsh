@@ -1,5 +1,6 @@
 alias doas='doas '                                      #  for working coplitions
 alias pager=$PAGER                                      # can be not "less"
+alias grep="grep --color"
 alias cat="bat -pp"
 alias _="doas"
 alias ls="eza --smart-group --icons --no-permissions --octal-permissions --git --extended"
