@@ -1,0 +1,4 @@
+include "~/.not-dotfiles/not-nano/syntax-imported/zshrc.nanorc"
+set nohelp
+set linenumbers
+set showcursor
