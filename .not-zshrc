@@ -7,7 +7,7 @@ _fix_cursor() {
    echo -ne '\e[3 q'
 }
 
-precmd_functions+=(_fix_cursor)
+# precmd_functions+=(_fix_cursor)
 
 source ~/.not-dotfiles/not-imports/not-gitstatusd.zsh
 
@@ -32,6 +32,8 @@ function precmd () {
     xtitle "$(print -P $HOST: '%~')"
 }
 ### end title
+
+alias dmesg="dmesg --color=always"
 
 source ~/.not-dotfiles/not-imports/not-aliases.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#bbbbbb"

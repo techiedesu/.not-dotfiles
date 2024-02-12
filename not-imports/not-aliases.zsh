@@ -2,6 +2,7 @@ alias doas='doas '                                      #  for working coplition
 alias pager=$PAGER                                      # can be not "less"
 alias grep="grep --color"
 alias cat="bat -pp"
+alias env="env | bat -l ini"
 alias _="doas"
 alias ls="eza --smart-group --icons --no-permissions --octal-permissions --git --extended"
 alias l="ls -l"
@@ -14,7 +15,8 @@ alias ip="ip -c"
 alias cp="rsync -ah --no-whole-file --info=progress2"
 
 ## gentoo-specific
-alias _p="_ emerge "
+alias p="emerge"
+alias _p="_ p"
 alias emc="_ e /etc/portage/make.conf"
 
 ## wayland-specific
@@ -31,7 +33,7 @@ alias cls="clear"
 alias hakirfedtch='neofetch --ascii_distro Kali | sed "s/Gentoo/Kali/g" | sed "s/gentoo/kali/g" | sed "s/emerge/stolen user passports/g" | sed "s/dist/zen/"'
 
 show-ebuild() {
-  cat $(equery w "$1")
+  pager $(equery w "$1")
 }
 
 unicode-unescape() {
