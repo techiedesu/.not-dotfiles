@@ -1,5 +1,6 @@
 alias doas='doas '                                      #  for working coplitions
 alias pager=$PAGER                                      # can be not "less"
+alias less=$PAGER
 alias grep="grep --color"
 alias cat="bat -pp"
 alias env="env | bat -l ini"
@@ -13,6 +14,7 @@ alias er="e ~/.zshrc"
 alias _e="_ $EDITOR"
 alias ip="ip -c"
 alias cp="rsync -ah --no-whole-file --info=progress2"
+alias jq="yq"
 
 ## gentoo-specific
 alias p="emerge"
