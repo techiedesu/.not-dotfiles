@@ -144,8 +144,10 @@ timezsh() {
 
 source ~/.not-dotfiles/not-imports/not-promt.zsh
 
-. /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
-. /usr/share/zsh/site-contrib/fast-syntax-highlighting/F-Sy-H.plugin.zsh
+
+. /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null || true
+. /usr/share/zsh/site-functions/zsh-autosuggestions.zsh 2> /dev/null || true
+. /usr/share/zsh/site-contrib/fast-syntax-highlighting/F-Sy-H.plugin.zsh 2> /dev/null || true
 
 autoload -U compinit promptinit
 compinit
