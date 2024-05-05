@@ -40,10 +40,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#bbbbbb"
 
 if [[ $UID != 0 && $EUID != 0 ]]; then
   export DOTNET_ROOT="$HOME/.dotnet"
+  . "$HOME/.asdf/asdf.sh"
   path+=("$HOME/.dotnet")
   path+=("$HOME/.dotnet/tools")
   fpath=(${ASDF_DIR}/completions $fpath)
-  . "$HOME/.asdf/asdf.sh"
 
   alias rcode="doas code --ozone-platform=wayland --user-data-dir='/root/.config/Code/' --no-sandbox"
 else
@@ -149,5 +149,6 @@ source ~/.not-dotfiles/not-imports/not-promt.zsh
 . /usr/share/zsh/site-functions/zsh-autosuggestions.zsh 2> /dev/null || true
 . /usr/share/zsh/site-contrib/fast-syntax-highlighting/F-Sy-H.plugin.zsh 2> /dev/null || true
 
-autoload -U compinit promptinit
-compinit
+. "$HOME/.cargo/env" 2> /dev/null || true
+
+autoload -Uz compinit promptinit && compinit

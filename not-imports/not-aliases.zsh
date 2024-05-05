@@ -27,19 +27,23 @@ fi
 
 alias l="ls -l"
 alias ll="ls -lah"
-alias e=$EDITOR
+
+if [[ -v EDITOR ]] then
+  alias e="$EDITOR"
+elif (($+commands[editor])) then
+  alias e=editor
+else
+  alias e="vim"
+fi
+
 alias rr=". ~/.zshrc"
 alias er="e ~/.zshrc"
-alias _e="_ $EDITOR"
+alias _e="_ e"
 alias ip="ip -c"
 alias cp="rsync -ah --no-whole-file --info=progress2"
 
 if (($+commands[yq])) then
   alias jq="yq"
-fi
-
-if (($+commands[yq])) then
-  
 fi
 
 ## gentoo-specific
