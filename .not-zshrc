@@ -148,6 +148,7 @@ source ~/.not-dotfiles/not-imports/not-promt.zsh
 . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null || true
 . /usr/share/zsh/site-functions/zsh-autosuggestions.zsh 2> /dev/null || true
 . /usr/share/zsh/site-contrib/fast-syntax-highlighting/F-Sy-H.plugin.zsh 2> /dev/null || true
+. /usr/share/zsh/site-contrib/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null || true
 
 . "$HOME/.cargo/env" 2> /dev/null || true
 
