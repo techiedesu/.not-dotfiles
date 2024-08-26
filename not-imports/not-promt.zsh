@@ -15,7 +15,7 @@ venv_info() {
 }
 
 update_prompt() {
-  PS1="$(venv_info)%(!.%F{red}superuser.%F{green}%n) %F{cyan}%(5~|%-1~/…/%2~|%3~) $(parse_git_branch)%(!.%F{red}#.%F{magenta}$) %b%f%k"
+  PS1="$(venv_info)%(!.%F{red}superuser.%F{green}%n) %F{cyan}%(5~|%-1~/…/%2~|%3~) $(parse_git_branch)%(!.%F{red}#.%F{magenta}％) %b%f%k"
 }
 
 precmd_functions+=(update_prompt)

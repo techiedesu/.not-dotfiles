@@ -44,10 +44,6 @@ if [[ $UID != 0 && $EUID != 0 ]]; then
   path+=("$HOME/.dotnet")
   path+=("$HOME/.dotnet/tools")
   fpath=(${ASDF_DIR}/completions $fpath)
-
-  alias rcode="doas code --ozone-platform=wayland --user-data-dir='/root/.config/Code/' --no-sandbox"
-else
-  alias rcode="code --ozone-platform=wayland --user-data-dir='/root/.config/Code/' --no-sandbox"
 fi
 
 ## History file configuration
@@ -152,4 +148,10 @@ source ~/.not-dotfiles/not-imports/not-promt.zsh
 
 . "$HOME/.cargo/env" 2> /dev/null || true
 
-autoload -Uz compinit promptinit && compinit
+
+# opam configuration
+[[ ! -r /home/td/.opam/opam-init/init.zsh ]] || source /home/td/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+autoload -Uz compinit
+compinit
+
