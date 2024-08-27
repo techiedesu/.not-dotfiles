@@ -148,9 +148,8 @@ source ~/.not-dotfiles/not-imports/not-promt.zsh
 
 . "$HOME/.cargo/env" 2> /dev/null || true
 
-
 # opam configuration
-[[ ! -r /home/td/.opam/opam-init/init.zsh ]] || source /home/td/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 autoload -Uz compinit
 compinit
