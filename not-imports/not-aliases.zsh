@@ -11,7 +11,7 @@ alias less=$PAGER
 alias grep="grep --color"
 
 if (($+commands[batcat])) then
-  alias bat="batcat"
+  alias bat=" "
 fi
 
 if (($+commands[bat])) then
@@ -52,12 +52,14 @@ if (($+commands[emerge])) then
   alias p="emerge"
   alias _p="_ p"
   alias _p1="_p -1"
+  alias _pn="_p --noreplace"
+  alias _pd="_p --depclean"
   alias emc="_ e /etc/portage/make.conf"
   alias eqf='equery f'
   alias equ='equery u'
   alias eqh='equery h'
   alias eqa='equery a'
-  alias eqb='equery b'
+  alias eqb='equery b'      
   alias eql='equery l'
   alias eqd='equery d'
   alias eqg='equery g'
