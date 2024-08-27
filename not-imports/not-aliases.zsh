@@ -51,6 +51,7 @@ fi
 if (($+commands[emerge])) then
   alias p="emerge"
   alias _p="_ p"
+  alias _p1="_p -1"
   alias emc="_ e /etc/portage/make.conf"
   alias eqf='equery f'
   alias equ='equery u'
