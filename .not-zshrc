@@ -3,6 +3,10 @@
 [ -n "$PS1" ] || \
   { echo "Allowed only sourcing"; exit $ERRCODE; }
 
+# hack for logging in with doas/sudo/su (zsh starts as non-interactive)
+[[ -n "$DOAS_USER" && -z "$SSH_TTY" ]] && source /etc/zsh/zprofile
+unsetopt histverify
+
 #_fix_cursor() {
 #   echo -ne '\e[3 q'
 #}
