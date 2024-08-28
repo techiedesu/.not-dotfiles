@@ -33,11 +33,13 @@ if [[ -v EDITOR ]] then
 elif (($+commands[editor])) then
   alias e=editor
 else
-  alias e="vim"
+  alias e="vi"
 fi
 
 alias rr=". ~/.zshrc"
 alias er="e ~/.zshrc"
+alias ea="e ~/.not-dotfiles/not-imports/not-aliases.zsh"
+alias eb="e ~/.not-dotfiles/not-imports/not-aliases.zsh"
 alias _e="_ e"
 alias ip="ip -c"
 alias cp="rsync -ah --no-whole-file --info=progress2"
@@ -50,6 +52,9 @@ fi
 
 if (($+commands[emerge])) then
   alias p="emerge"
+  alias p1="p1"
+  alias pn="p --noreplace"
+  alias pd="p --depclean"
   alias _p="_ p"
   alias _p1="_p -1"
   alias _pn="_p --noreplace"
