@@ -44,7 +44,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#bbbbbb"
 
 if [[ $UID != 0 && $EUID != 0 ]]; then
   export DOTNET_ROOT="$HOME/.dotnet"
-  . "$HOME/.asdf/asdf.sh"
+  . "$HOME/.asdf/asdf.sh" 2> /dev/null || true
   path+=("$HOME/.dotnet")
   path+=("$HOME/.dotnet/tools")
   fpath=(${ASDF_DIR}/completions $fpath)
