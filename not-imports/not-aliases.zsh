@@ -96,3 +96,5 @@ alias hakirfedtch='neofetch --ascii_distro Kali | sed "s/Gentoo/Kali/g" | sed "s
 unicode-unescape() {
   echo -en $(cat $1)
 }
+
+alias dotnet='nocorrect dotnet'
