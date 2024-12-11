@@ -14,8 +14,8 @@ get_hostname() {
 }
 
 venv_info() {
-  if [[ -n $VIRTUAL_ENV ]]; then
-    local venv=%F{yellow}$VIRTUAL_ENV_PROMPT
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    local venv=%F{yellow}${VIRTUAL_ENV_PROMPT:-$(basename $VIRTUAL_ENV)}
     echo "$venv"
   fi
 }
