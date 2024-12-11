@@ -1,13 +1,16 @@
+#  for working completions
 if (($+commands[doas])) then
-  alias doas="doas "                      #  for working coplitions
+  alias doas="doas " 
   alias _="doas"
 elif (($+commands[sudo])) then
   alias sudo="sudo "
   alias _="sudo"
 fi
 
-alias pager=$PAGER                                      # can be not "less"
+# can be not "less"
+alias pager=$PAGER                                      
 alias less=$PAGER
+
 alias grep="grep --color"
 
 if (($+commands[batcat])) then
@@ -83,7 +86,7 @@ if (($+commands[emerge])) then
   }
 fi
 
-## weird cmd-style binds (just for lulz)
+# weird cmd-style binds (for lulz)
 alias CD="cd"
 alias cd..="cd.."
 alias CD..=".."
@@ -97,4 +100,5 @@ unicode-unescape() {
   echo -en $(cat $1)
 }
 
+# Prevent zsh corrections
 alias dotnet='nocorrect dotnet'
