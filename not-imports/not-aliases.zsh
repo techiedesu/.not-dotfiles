@@ -50,6 +50,10 @@ alias cp="rsync -ah --no-whole-file --info=progress2"
 # git
 source ~/.not-dotfiles/not-imports/not-aliases/not-git.zsh
 
+if (($+commands[podman])) then
+  alias docker="podman"
+fi
+
 if (($+commands[yq])) then
   alias jq="yq"
 fi
@@ -77,5 +81,5 @@ unicode-unescape() {
 
 # Prevent zsh corrections
 alias dotnet='nocorrect dotnet'
-alias eselect='nocorrect eselect'
+#alias eselect='nocorrect eselect'
 alias whereis='nocorrect whereis'
