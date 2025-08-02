@@ -1,3 +1,4 @@
+# Try to extract current branch name
 parse_git_branch() {
   local branch=${GITSTATUS_PROMPT}
 
@@ -7,12 +8,15 @@ parse_git_branch() {
   fi
 }
 
+# Try to get current hostname
+# Shows for remote sessions only
 get_hostname() {
   if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     echo "%F{red}[ %F{magenta}%m %F{red}] "
   fi
 }
 
+# Try to get current venv name
 venv_info() {
   if [[ -n "$VIRTUAL_ENV" ]]; then
     local venv=%F{yellow}${VIRTUAL_ENV_PROMPT:-$(basename $VIRTUAL_ENV)}

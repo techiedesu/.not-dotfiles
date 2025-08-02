@@ -1,7 +1,6 @@
 # zmodload zsh/zprof
 
-[ -n "$PS1" ] || \
-  { echo "Allowed only sourcing"; exit $ERRCODE; }
+[ -n "$PS1" ] || { echo "Allowed only sourcing"; exit $ERRCODE; }
 
 # hack for logging in with doas/sudo/su (zsh starts as non-interactive)
 [[ -n "$DOAS_USER" && -z "$SSH_TTY" ]] && source /etc/zsh/zprofile
