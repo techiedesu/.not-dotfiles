@@ -46,6 +46,7 @@ alias eb="e ~/.not-dotfiles/not-imports/not-aliases.zsh"
 alias _e="_ e"
 alias ip="ip -c"
 alias cp="rsync -ah --no-whole-file --info=progress2"
+alias unixtime="date +%s"
 
 # git
 source ~/.not-dotfiles/not-imports/not-aliases/not-git.zsh
